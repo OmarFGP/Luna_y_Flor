@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luna Realista 3D - Efectos Galácticos</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            /* FONDO GALÁCTICO MEJORADO */
+            background: 
+                /* Galaxia espiral */
+                radial-gradient(ellipse 800px 300px at 20% 80%, 
+                    rgba(120, 119, 198, 0.3) 0%, 
+                    transparent 50%),
+                radial-gradient(ellipse 600px 200px at 80% 20%, 
+                    rgba(255, 119, 198, 0.2) 0%, 
+                    transparent 50%),
+                /* Nebulosa central */
+                radial-gradient(circle 400px at 50% 50%, 
+                    rgba(138, 43, 226, 0.1) 0%, 
+                    transparent 70%),
+                /* Campo de estrellas base */
+                radial-gradient(2px 2px at 100px 50px, #fff, transparent),
+                radial-gradient(1px 1px at 300px 80px, #fff, transparent),
+                radial-gradient(2px 2px at 200px 150px, rgba(255,255,255,0.8), transparent),
+                radial-gradient(1px 1px at 450px 120px, #fff, transparent),
+                radial-gradient(2px 2px at 150px 300px, rgba(255,255,255,0.6), transparent),
+                radial-gradient(1px 1px at 350px 250px, #fff, transparent),
+                radial-gradient(1px 1px at 500px 350px, rgba(255,255,255,0.8), transparent),
+                radial-gradient(2px 2px at 80px 200px, #fff, transparent),
+                /* Gradiente base mejorado */
+                linear-gradient(135deg, 
+                    #0c0c1e 0%, 
+                    #1a1a2e 25%,
+                    #16213e 50%,
+                    #2d1b69 75%,
+                    #1a1a2e 100%);
+            
+            margin: 0;
+            padding: 10px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            position: relative;
+            
+            /* ANIMACIÓN DE FONDO */
+            animation: galaxy-drift 120s linear infinite;
+        }
+
+        /* Animación del fondo galáctico */
+        @keyframes galaxy-drift {
+            0% { background-position: 0% 0%, 0% 0%, 0% 0%, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0% 0%; }
+            100% { background-position: 100% 100%, -100% -100%, 50% 50%, 20px 10px, 10px 5px, 15px 8px, 25px 12px, 18px 9px, 12px 6px, 22px 11px, 8px 4px, 100% 100%; }
+        }
+
+        /* ========== NUEVAS GALAXIAS ESPIRALES ROTANDO ========== */
+        .spiral-galaxy {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.3;
+            pointer-events: none;
+            background: conic-gradient(
+                from 0deg,
+                transparent,
+                rgba(138, 43, 226, 0.3),
+                transparent 120deg,
+                rgba(255, 119, 198, 0.2),
+                transparent 240deg,
+                rgba(120, 119, 198, 0.3),
+                transparent
+            );
+            filter: blur(1px);
+        }
+
+        .spiral-galaxy-1 {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: -5%;
+            animation: spiral-rotate-slow 60s linear infinite;
+        }
+
+        .spiral-galaxy-2 {
+            width: 250px;
+            height: 250px;
+            bottom: 15%;
+            right: -5%;
+            animation: spiral-rotate-slow 80s linear infinite reverse;
+        }
+
+        .spiral-galaxy-3 {
+            width: 200px;
+            height: 200px;
+            top: 60%;
+            left: 10%;
+            animation: spiral-rotate-slow 45s linear infinite;
+        }
+
+        .spiral-galaxy-4 {
+            width: 180px;
+            height: 180px;
+            top: 20%;
+            right: 20%;
+            animation: spiral-rotate-slow 70s linear infinite reverse;
+        }
+
+        @keyframes spiral-rotate-slow {
+            0% { transform: rotate(0deg) scale(0.8); }
+            25% { transform: rotate(90deg) scale(1); }
+            50% { transform: rotate(180deg) scale(0.9); }
+            75% { transform: rotate(270deg) scale(1.1); }
+            100% { transform: rotate(360deg) scale(0.8); }
+        }
+
+        /* ========== METEORITOS MEJORADOS ========== */
+        .meteorite {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: linear-gradient(45deg, transparent, #fff, #00bfff, transparent);
+            border-radius: 50%;
+            opacity: 0;
+            box-shadow: 0 0 10px #fff, 0 0 20px #00bfff, 0 0 30px #ff69b4;
+        }
+
+        .meteorite-1 {
+            top: 5%;
+            left: 95%;
+            animation: meteorite-fall 4s linear infinite;
+            animation-delay: 3s;
+        }
+
+        .meteorite-2 {
+            top: 15%;
+            left: 90%;
+            animation: meteorite-fall 3.5s linear infinite;
+            animation-delay: 8s;
+        }
+
+        .meteorite-3 {
+            top: 25%;
+            left: 95%;
+            animation: meteorite-fall 5s linear infinite;
+            animation-delay: 15s;
+        }
+
+        .meteorite-4 {
+            top: 35%;
+            left: 100%;
+            animation: meteorite-fall 3s linear infinite;
+            animation-delay: 22s;
+        }
+
+        .meteorite-5 {
+            top: 45%;
+            left: 92%;
+            animation: meteorite-fall 4.5s linear infinite;
+            animation-delay: 30s;
+        }
+
+        @keyframes meteorite-fall {
+            0% {
+                opacity: 0;
+                transform: translateX(0) translateY(0) scale(0);
+            }
+            5% {
+                opacity: 1;
+                transform: translateX(-50px) translateY(50px) scale(1);
+                box-shadow: 0 0 15px #fff, 0 0 25px #00bfff, 0 0 35px #ff69b4, -20px -20px 20px rgba(255,255,255,0.3);
+            }
+            90% {
+                opacity: 1;
+                transform: translateX(-400px) translateY(400px) scale(1.2);
+                box-shadow: 0 0 20px #fff, 0 0 30px #00bfff, 0 0 40px #ff69b4, -30px -30px 30px rgba(255,255,255,0.2);
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(-500px) translateY(500px) scale(0);
+            }
+        }
+
+        /* ========== EXPLOSIÓN DE LUZ AL HACER CLICK ========== */
+        .light-explosion {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle,
+                rgba(255, 255, 255, 1) 0%,
+                rgba(255, 255, 255, 0.8) 10%,
+                rgba(138, 43, 226, 0.6) 30%,
+                rgba(255, 119, 198, 0.4) 50%,
+                rgba(0, 191, 255, 0.2) 70%,
+                transparent 100%
+            );
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0;
+            box-shadow: 
+                0 0 100px rgba(255, 255, 255, 0.8),
+                0 0 200px rgba(138, 43, 226, 0.6),
+                0 0 300px rgba(255, 119, 198, 0.4);
+        }
+
+        .light-explosion.active {
+            animation: light-burst 1.2s ease-out forwards;
+        }
+
+        @keyframes light-burst {
+            0% {
+                width: 0;
+                height: 0;
+                opacity: 0;
+            }
+            20% {
+                width: 200px;
+                height: 200px;
+                opacity: 1;
+                box-shadow: 
+                    0 0 150px rgba(255, 255, 255, 1),
+                    0 0 300px rgba(138, 43, 226, 0.8),
+                    0 0 450px rgba(255, 119, 198, 0.6);
+            }
+            40% {
+                width: 400px;
+                height: 400px;
+                opacity: 0.8;
+            }
+            70% {
+                width: 600px;
+                height: 600px;
+                opacity: 0.4;
+                box-shadow: 
+                    0 0 200px rgba(255, 255, 255, 0.6),
+                    0 0 400px rgba(138, 43, 226, 0.4),
+                    0 0 600px rgba(255, 119, 198, 0.2);
+            }
+            100% {
+                width: 800px;
+                height: 800px;
+                opacity: 0;
+                box-shadow: none;
+            }
+        }
+
+        /* Partículas de la explosión */
+        .explosion-particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(circle, #fff 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 999;
+            opacity: 0;
+        }
+
+        .explosion-particle.active {
+            animation: particle-burst 2s ease-out forwards;
+        }
+
+        @keyframes particle-burst {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+                box-shadow: 0 0 10px #fff;
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.5);
+                box-shadow: 0 0 15px #fff, 0 0 25px rgba(138, 43, 226, 0.5);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.5);
+                box-shadow: none;
+            }
+        }
+
+        /* METEOROS OCASIONALES (mantenidos del código original) */
+        .meteor {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: linear-gradient(45deg, transparent, #fff, transparent);
+            border-radius: 50%;
+            opacity: 0;
+            animation: meteor-fall 3s linear infinite;
+        }
+
+        .meteor-1 {
+            top: 10%;
+            left: 80%;
+            animation-delay: 2s;
+            animation-duration: 2.5s;
+        }
+
+        .meteor-2 {
+            top: 30%;
+            left: 90%;
+            animation-delay: 8s;
+            animation-duration: 3s;
+        }
+
+        .meteor-3 {
+            top: 5%;
+            left: 70%;
+            animation-delay: 15s;
+            animation-duration: 2s;
+        }
+
+        @keyframes meteor-fall {
+            0% {
+                opacity: 0;
+                transform: translateX(0) translateY(0) scale(0);
+            }
+            10% {
+                opacity: 1;
+                transform: translateX(-20px) translateY(20px) scale(1);
+                box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff;
+            }
+            90% {
+                opacity: 1;
+                transform: translateX(-200px) translateY(200px) scale(1);
+                box-shadow: 0 0 10px #fff;
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(-250px) translateY(250px) scale(0);
+            }
+        }
+
+        /* AURORA BOREAL SUTIL */
+        .aurora {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(0deg, 
+                transparent 70%,
+                rgba(0, 255, 127, 0.1) 80%,
+                rgba(0, 191, 255, 0.1) 85%,
+                rgba(138, 43, 226, 0.1) 90%,
+                transparent 100%);
+            animation: aurora-dance 15s ease-in-out infinite alternate;
+            pointer-events: none;
+        }
+
+        @keyframes aurora-dance {
+            0% { 
+                opacity: 0.3;
+                transform: skewX(0deg);
+            }
+            50% { 
+                opacity: 0.6;
+                transform: skewX(2deg);
+            }
+            100% { 
+                opacity: 0.3;
+                transform: skewX(-1deg);
+            }
+        }
+
+        /* EFECTO: CONSTELACIONES ANIMADAS (mantenidas del código anterior) */
+        .constellation {
+            position: absolute;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .constellation-1 {
+            top: 10%;
+            left: 15%;
+            animation: constellation-appear 8s infinite ease-in-out;
+        }
+
+        .constellation-2 {
+            top: 20%;
+            right: 20%;
+            animation: constellation-appear 10s infinite ease-in-out 2s;
+        }
+
+        .constellation-3 {
+            bottom: 25%;
+            left: 10%;
+            animation: constellation-appear 12s infinite ease-in-out 4s;
+        }
+
+        .constellation-4 {
+            bottom: 15%;
+            right: 15%;
+            animation: constellation-appear 9s infinite ease-in-out 1s;
+        }
+
+        .star-point {
+            width: 3px;
+            height: 3px;
+            background: #fff;
+            border-radius: 50%;
+            position: absolute;
+            box-shadow: 0 0 6px rgba(255,255,255,0.8);
+            animation: twinkle-star 2s infinite ease-in-out;
+        }
+
+        .star-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transform-origin: left center;
+        }
+
+        @keyframes constellation-appear {
+            0%, 20% { opacity: 0; transform: scale(0.8); }
+            40%, 80% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(0.8); }
+        }
+
+        @keyframes twinkle-star {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Contenedor principal de la luna - RESPONSIVO */
+        .moon-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 400px;
+            aspect-ratio: 1;
+            z-index: 5;
+            perspective: 1000px; /* Para el efecto 3D */
+        }
+
+        /* TEXTOS CON EFECTO MEJORADO */
+        .text-above,
+        .text-below {
+            position: absolute;
+            text-align: center;
+            color: #fff;
+            font-weight: bold;
+            text-shadow: 
+                0 0 10px rgba(255, 255, 255, 0.8),
+                0 0 20px rgba(138, 43, 226, 0.4),
+                0 0 30px rgba(0, 191, 255, 0.2);
+            z-index: 10;
+            opacity: 0;
+            transform: translateY(20px);
+            white-space: nowrap;
+            padding: 0 10px;
+        }
+
+        .text-above {
+            top: -15%;
+            animation: text-fade-in 2s ease-out 1s forwards;
+            font-size: clamp(16px, 4vw, 28px);
+        }
+
+        .text-below {
+            bottom: -15%;
+            animation: text-fade-in 2s ease-out 2.5s forwards;
+            font-size: clamp(16px, 4vw, 28px);
+        }
+
+        @keyframes text-fade-in {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* EFECTO 3D REAL PARA LA LUNA */
+        .moon {
+            width: 80%;
+            max-width: 250px;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            
+            /* Gradiente base mejorado */
+            background: 
+                /* Superficie lunar detallada */
+                radial-gradient(circle at 25% 25%, rgba(255,255,255,0.3) 0%, transparent 20%),
+                radial-gradient(circle at 70% 30%, rgba(0,0,0,0.2) 0%, transparent 15%),
+                radial-gradient(circle at 45% 60%, rgba(0,0,0,0.15) 0%, transparent 10%),
+                radial-gradient(circle at 80% 70%, rgba(255,255,255,0.2) 0%, transparent 12%),
+                /* Base lunar */
+                radial-gradient(circle at 30% 30%, 
+                    #f5f5dc 0%,
+                    #e6e6dc 15%,
+                    #d9d9d0 30%,
+                    #ccccbf 45%,
+                    #bfbfb3 60%,
+                    #b3b3a6 75%,
+                    #a6a699 90%,
+                    #99998c 100%);
+            
+            /* Sombras 3D mejoradas */
+            box-shadow: 
+                /* Sombra interna para profundidad */
+                inset -40px -40px 80px rgba(0,0,0,0.6),
+                inset 30px 30px 60px rgba(255,255,255,0.15),
+                /* Resplandor exterior */
+                0 0 40px rgba(255,255,255,0.3),
+                0 0 80px rgba(255,255,255,0.15),
+                0 0 120px rgba(138, 43, 226, 0.1);
+            
+            /* ROTACIÓN 3D ESPECTACULAR */
+            animation: 
+                moon-3d-rotation 30s linear infinite,
+                moonGlow 4s infinite ease-in-out,
+                moon-float 6s ease-in-out infinite;
+            
+            /* Entrada suave */
+            opacity: 0;
+            transform: scale(0.5) rotateX(0deg) rotateY(0deg);
+            animation-delay: 0s, 0s, 3s;
+            animation-fill-mode: forwards, none, none;
+            animation-name: moon-enter, moonGlow, moon-float;
+            animation-duration: 2s, 4s, 6s;
+            animation-timing-function: ease-out, ease-in-out, ease-in-out;
+            animation-iteration-count: 1, infinite, infinite;
+            
+            /* Transformación 3D */
+            transform-style: preserve-3d;
+        }
+
+        /* ANIMACIÓN 3D REAL - MUY VISIBLE */
+        @keyframes moon-3d-rotation {
+            0% { 
+                transform: rotateX(15deg) rotateY(0deg) rotateZ(0deg);
+            }
+            25% { 
+                transform: rotateX(10deg) rotateY(90deg) rotateZ(5deg);
+            }
+            50% { 
+                transform: rotateX(5deg) rotateY(180deg) rotateZ(0deg);
+            }
+            75% { 
+                transform: rotateX(10deg) rotateY(270deg) rotateZ(-5deg);
+            }
+            100% { 
+                transform: rotateX(15deg) rotateY(360deg) rotateZ(0deg);
+            }
+        }
+
+        /* Animación de flotación */
+        @keyframes moon-float {
+            0%, 100% { 
+                transform: translateY(0px);
+            }
+            50% { 
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Animación de entrada de la luna */
+        @keyframes moon-enter {
+            0% {
+                opacity: 0;
+                transform: scale(0.5) rotateX(45deg) rotateY(45deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotateX(15deg) rotateY(0deg);
+            }
+        }
+
+        /* Cráteres lunares 3D - MEJORADOS */
+        .moon::before {
+            content: '';
+            position: absolute;
+            width: 16%;
+            aspect-ratio: 1;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1) 0%, transparent 40%),
+                radial-gradient(circle, 
+                    rgba(0,0,0,0.4) 0%,
+                    rgba(0,0,0,0.2) 50%,
+                    transparent 100%);
+            border-radius: 50%;
+            top: 24%;
+            left: 32%;
+            box-shadow: inset 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .moon::after {
+            content: '';
+            position: absolute;
+            width: 10%;
+            aspect-ratio: 1;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255,255,255,0.1) 0%, transparent 30%),
+                radial-gradient(circle, 
+                    rgba(0,0,0,0.3) 0%,
+                    rgba(0,0,0,0.15) 50%,
+                    transparent 100%);
+            border-radius: 50%;
+            top: 56%;
+            left: 64%;
+            box-shadow: inset 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        /* Cráteres adicionales 3D */
+        .crater1, .crater2, .crater3 {
+            position: absolute;
+            border-radius: 50%;
+            background: 
+                radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 0%, transparent 30%),
+                radial-gradient(circle, 
+                    rgba(0,0,0,0.25) 0%,
+                    rgba(0,0,0,0.12) 50%,
+                    transparent 100%);
+        }
+
+        .crater1 {
+            width: 8%;
+            aspect-ratio: 1;
+            top: 40%;
+            left: 20%;
+            box-shadow: inset 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .crater2 {
+            width: 6%;
+            aspect-ratio: 1;
+            top: 72%;
+            left: 40%;
+            box-shadow: inset 1px 1px 1px rgba(0,0,0,0.15);
+        }
+
+        .crater3 {
+            width: 12%;
+            aspect-ratio: 1;
+            top: 20%;
+            left: 60%;
+            box-shadow: inset 2px 2px 3px rgba(0,0,0,0.25);
+        }
+
+        /* Efectos de hover 3D */
+        .moon:hover, .moon:active {
+            transform: scale(1.1) rotateX(0deg) rotateY(0deg);
+            box-shadow: 
+                inset -40px -40px 80px rgba(0,0,0,0.6),
+                inset 30px 30px 60px rgba(255,255,255,0.15),
+                0 0 60px rgba(255,255,255,0.4),
+                0 0 120px rgba(255,255,255,0.2),
+                0 0 180px rgba(138, 43, 226, 0.15);
+        }
+
+        /* Animación de resplandor mejorada */
+        @keyframes moonGlow {
+            0%, 100% {
+                box-shadow: 
+                    inset -40px -40px 80px rgba(0,0,0,0.6),
+                    inset 30px 30px 60px rgba(255,255,255,0.15),
+                    0 0 40px rgba(255,255,255,0.3),
+                    0 0 80px rgba(255,255,255,0.15),
+                    0 0 120px rgba(138, 43, 226, 0.1);
+            }
+            50% {
+                box-shadow: 
+                    inset -40px -40px 80px rgba(0,0,0,0.6),
+                    inset 30px 30px 60px rgba(255,255,255,0.15),
+                    0 0 60px rgba(255,255,255,0.4),
+                    0 0 120px rgba(255,255,255,0.2),
+                    0 0 180px rgba(138, 43, 226, 0.15);
+            }
+        }
+
+        /* Efecto de click 3D */
+        .moon:active {
+            transform: scale(0.95) rotateX(5deg) rotateY(5deg);
+        }
+
+        /* MEDIA QUERIES PARA MÓVIL */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 10px;
+            }
+            
+            .moon-container {
+                max-width: 300px;
+            }
+            
+            .text-above {
+                top: -20%;
+                font-size: clamp(14px, 5vw, 24px);
+            }
+            
+            .text-below {
+                bottom: -20%;
+                font-size: clamp(14px, 5vw, 24px);
+            }
+            
+            .star-point {
+                width: 2px;
+                height: 2px;
+            }
+            
+            /* Reduce el tamaño de las galaxias en móvil */
+            .spiral-galaxy-1 { width: 200px; height: 200px; }
+            .spiral-galaxy-2 { width: 150px; height: 150px; }
+            .spiral-galaxy-3 { width: 120px; height: 120px; }
+            .spiral-galaxy-4 { width: 100px; height: 100px; }
+            
+            /* Reduce la intensidad del 3D en móviles */
+            @keyframes moon-3d-rotation {
+                0% { transform: rotateY(0deg) rotateX(5deg); }
+                25% { transform: rotateY(90deg) rotateX(10deg); }
+                50% { transform: rotateY(180deg) rotateX(5deg); }
+                75% { transform: rotateY(270deg) rotateX(10deg); }
+                100% { transform: rotateY(360deg) rotateX(5deg); }
+            }
+        }
+
+        @media (max-width: 480px) {
+            .moon-container {
+                max-width: 250px;
+            }
+            
+            .text-above {
+                top: -25%;
+            }
+            
+            .text-below {
+                bottom: -25%;
+            }
+        }
+
+        /* Mejoras para pantallas táctiles */
+        @media (hover: none) and (pointer: coarse) {
+            .moon {
+                transition: transform 0.2s ease;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- GALAXIAS ESPIRALES ROTANDO -->
+    <div class="spiral-galaxy spiral-galaxy-1"></div>
+    <div class="spiral-galaxy spiral-galaxy-2"></div>
+    <div class="spiral-galaxy spiral-galaxy-3"></div>
+    <div class="spiral-galaxy spiral-galaxy-4"></div>
+    
+    <!-- AURORA BOREAL -->
+    <div class="aurora"></div>
+    
+    <!-- METEORITOS MEJORADOS -->
+    <div class="meteorite meteorite-1"></div>
+    <div class="meteorite meteorite-2"></div>
+    <div class="meteorite meteorite-3"></div>
+    <div class="meteorite meteorite-4"></div>
+    <div class="meteorite meteorite-5"></div>
+    
+    <!-- METEOROS OCASIONALES (originales) -->
+    <div class="meteor meteor-1"></div>
+    <div class="meteor meteor-2"></div>
+    <div class="meteor meteor-3"></div>
+    
+    <!-- EXPLOSIÓN DE LUZ -->
+    <div class="light-explosion" id="lightExplosion"></div>
+    
+    <!-- CONSTELACIONES ANIMADAS -->
+    <div class="constellation constellation-1">
+        <div class="star-point" style="top: 0; left: 0;"></div>
+        <div class="star-point" style="top: 5px; left: 20px;"></div>
+        <div class="star-point" style="top: -5px; left: 40px;"></div>
+        <div class="star-point" style="top: 10px; left: 60px;"></div>
+        <div class="star-point" style="top: 25px; left: 70px;"></div>
+        <div class="star-point" style="top: 40px; left: 60px;"></div>
+        <div class="star-point" style="top: 35px; left: 40px;"></div>
+        <div class="star-line" style="top: 2px; left: 3px; width: 18px; transform: rotate(15deg);"></div>
+        <div class="star-line" style="top: 7px; left: 22px; width: 20px; transform: rotate(-15deg);"></div>
+        <div class="star-line" style="top: 0px; left: 42px; width: 22px; transform: rotate(35deg);"></div>
+        <div class="star-line" style="top: 15px; left: 62px; width: 18px; transform: rotate(55deg);"></div>
+        <div class="star-line" style="top: 30px; left: 65px; width: 22px; transform: rotate(135deg);"></div>
+        <div class="star-line" style="top: 38px; left: 42px; width: 18px; transform: rotate(-15deg);"></div>
+    </div>
+
+    <div class="constellation constellation-2">
+        <div class="star-point" style="top: 0; left: 15px;"></div>
+        <div class="star-point" style="top: 30px; left: 0;"></div>
+        <div class="star-point" style="top: 30px; left: 30px;"></div>
+        <div class="star-line" style="top: 5px; left: 10px; width: 20px; transform: rotate(135deg);"></div>
+        <div class="star-line" style="top: 5px; left: 20px; width: 20px; transform: rotate(45deg);"></div>
+        <div class="star-line" style="top: 32px; left: 3px; width: 25px;"></div>
+    </div>
+
+    <div class="constellation constellation-3">
+        <div class="star-point" style="top: 15px; left: 15px;"></div>
+        <div class="star-point" style="top: 0; left: 15px;"></div>
+        <div class="star-point" style="top: 30px; left: 15px;"></div>
+        <div class="star-point" style="top: 15px; left: 0;"></div>
+        <div class="star-point" style="top: 15px; left: 30px;"></div>
+        <div class="star-line" style="top: 2px; left: 17px; width: 13px; transform: rotate(90deg);"></div>
+        <div class="star-line" style="top: 22px; left: 17px; width: 13px; transform: rotate(90deg);"></div>
+        <div class="star-line" style="top: 17px; left: 2px; width: 13px;"></div>
+        <div class="star-line" style="top: 17px; left: 20px; width: 13px;"></div>
+    </div>
+
+    <div class="constellation constellation-4">
+        <div class="star-point" style="top: 0; left: 0;"></div>
+        <div class="star-point" style="top: 10px; left: 15px;"></div>
+        <div class="star-point" style="top: 25px; left: 35px;"></div>
+        <div class="star-point" style="top: 20px; left: 50px;"></div>
+        <div class="star-line" style="top: 3px; left: 3px; width: 15px; transform: rotate(35deg);"></div>
+        <div class="star-line" style="top: 13px; left: 18px; width: 22px; transform: rotate(40deg);"></div>
+        <div class="star-line" style="top: 26px; left: 38px; width: 15px; transform: rotate(-20deg);"></div>
+    </div>
+    
+    <div class="moon-container">
+        <!-- CAMBIAR: Modifica estos textos según tus necesidades -->
+        <div class="text-above">Este pequeño para la PJ<br>ahi me disculapa lo poquito</div>
+        
+        <!-- Luna 3D interactiva -->
+        <div class="moon" onclick="triggerLightExplosion()">
+            <!-- Cráteres 3D adicionales -->
+            <div class="crater1"></div>
+            <div class="crater2"></div>
+            <div class="crater3"></div>
+        </div>
+        
+        <!-- CAMBIAR: Modifica estos textos según tus necesidades -->
+        <div class="text-below">Te gusta la luna verdad<br>Tocala! no explota (creo).</div>
+    </div>
+
+    <script>
+        // ========== EXPLOSIÓN DE LUZ AL HACER CLICK ==========
+        function triggerLightExplosion() {
+            const explosion = document.getElementById('lightExplosion');
+            
+            // Resetear la animación si ya está activa
+            explosion.classList.remove('active');
+            
+            // Crear partículas de explosión
+            createExplosionParticles();
+            
+            // Trigger la explosión principal después de un pequeño delay
+            setTimeout(() => {
+                explosion.classList.add('active');
+            }, 10);
+            
+            // Después de la explosión, redirigir (opcional)
+            setTimeout(() => {
+                redirectToPage();
+            }, 800);
+            
+            // Remover la clase después de la animación
+            setTimeout(() => {
+                explosion.classList.remove('active');
+            }, 1200);
+        }
+
+        // Crear partículas de explosión
+        function createExplosionParticles() {
+            const moonContainer = document.querySelector('.moon-container');
+            const numberOfParticles = 12;
+            
+            for (let i = 0; i < numberOfParticles; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('explosion-particle');
+                
+                // Posición aleatoria alrededor del centro de la luna
+                const angle = (360 / numberOfParticles) * i;
+                const distance = 50 + Math.random() * 100;
+                const x = Math.cos(angle * Math.PI / 180) * distance;
+                const y = Math.sin(angle * Math.PI / 180) * distance;
+                
+                particle.style.left = `calc(50% + ${x}px)`;
+                particle.style.top = `calc(50% + ${y}px)`;
+                particle.style.transform = 'translate(-50%, -50%)';
+                
+                // Animación personalizada para cada partícula
+                particle.style.animationDelay = `${Math.random() * 0.3}s`;
+                particle.style.animationDuration = `${1.5 + Math.random()}s`;
+                
+                moonContainer.appendChild(particle);
+                
+                // Activar la animación
+                setTimeout(() => {
+                    particle.classList.add('active');
+                }, 50);
+                
+                // Remover la partícula después de la animación
+                setTimeout(() => {
+                    if (particle.parentNode) {
+                        particle.parentNode.removeChild(particle);
+                    }
+                }, 3000);
+            }
+        }
+
+        // CAMBIAR: Modifica esta función para redirigir a tu página deseada
+        function redirectToPage() {
+            window.location.href = 'flower.html';   
+        }
+
+        // Mejoras para dispositivos táctiles
+        const moon = document.querySelector('.moon');
+        
+        moon.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            this.style.transform = 'scale(0.95)';
+        });
+        
+        moon.addEventListener('touchend', function(e) {
+            e.preventDefault();
+            this.style.transform = 'scale(1)';
+            setTimeout(() => triggerLightExplosion(), 100);
+        });
+        
+        // Efecto adicional: Crear más meteoritos dinámicamente
+        function createRandomMeteor() {
+            const meteor = document.createElement('div');
+            meteor.classList.add('meteorite');
+            meteor.style.top = Math.random() * 50 + '%';
+            meteor.style.left = '105%';
+            meteor.style.animationDuration = (2 + Math.random() * 3) + 's';
+            meteor.style.animationDelay = '0s';
+            
+            document.body.appendChild(meteor);
+            
+            // Remover el meteorito después de la animación
+            setTimeout(() => {
+                if (meteor.parentNode) {
+                    meteor.parentNode.removeChild(meteor);
+                }
+            }, 6000);
+        }
+
+        // Crear meteoritos aleatorios cada cierto tiempo
+        setInterval(createRandomMeteor, 15000 + Math.random() * 10000);
+
+    </script>
+</body>
+</html>
+<!-- Código: Daniel Arteaga de Faster Academy - Efectos Galácticos Mejorados -->
